@@ -1,0 +1,44 @@
+
+
+class Solution {
+    boolean checkTriplet(int[] arr, int n) {
+        int max = 0;
+
+        // Find the maximum element
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, arr[i]);
+        } 
+        max = max * max;
+
+        int[] freq = new int[max + 1];
+
+        // Increase the frequency of array elements squared
+        for (int i = 0; i < n; i++) {
+            freq[arr[i] * arr[i]]++;
+        }
+
+        // Iterate over all possible values of a
+        for (int i = 1; i <= max; i++) {
+            // If a is not present, continue to the next value
+            if (freq[i] == 0) 
+                continue;
+
+            // Iterate over all possible values of b
+            for (int j = 1; j <= max; j++) {
+                // If b is not present or if a and b are the same and there is only one a, continue
+                if (freq[j] == 0 || (i == j && freq[i] == 1)) {
+                    continue;
+                }
+
+                // Calculate the potential value of c
+                int c = i + j;
+
+                // If c is within the range of frequencies and it is present, return true
+                if (c <= max && freq[c] > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}

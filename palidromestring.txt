@@ -1,0 +1,18 @@
+
+
+
+
+class Solution {
+    int isPalindrome(String S) {
+        int start = 0;
+        int end = S.length() - 1;
+        while (start < end) {
+            if (!Character.toString(S.charAt(start)).equals(Character.toString(S.charAt(end)))) {
+                return 0;
+            }
+            start++;
+            end--;
+        }
+        return 1;
+    }
+}
